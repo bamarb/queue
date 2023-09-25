@@ -41,24 +41,19 @@ QUEUE* initQueue() {
 }
 
 int isEmpty(QUEUE *q) {
-  if (q->rear == NULL) return 1;
+  if ((q->rear == NULL) && (q->front == NULL)) return 1;
   return 0;
 }
 
 /* Get the length or number of items int the queue*/
-int len(NODEPTR rear) {
-  if (NULL == rear) return 0;
+int len(QUEUE *q) {
   /* n stores the number of items in the queue */
   int n = 0;
-  /* We need to traverse the linked List starting at the rear going to the front of the queue */ 
-  /* While counting the items */
-  NODEPTR node = rear;
-  
+  NODEPTR node = q->front;
   while (NULL != node) {
     n = n + 1;
     node = node->next;
   }
-
   return n;
 }
 
@@ -121,24 +116,24 @@ int main() {
 
   printf("Creating a new  empty queue\n");
   QUEUE *q = initQueue();
-  printf("Items in the Queue:%d\n",len(q->rear));
+  printf("Items in the Queue:%d\n",len(q));
   printQueue(q);
 
   printf("Insert Element 1 to the Queue\n");
   insert(q,1);
   NODEPTR root = q->rear;
 
-  printf("Items in the Queue:%d\n",len(root));
+  printf("Items in the Queue:%d\n",len(q));
   printQueue(q);
 
   printf("Insert Element 2 to the Queue\n");
   insert(q,2);
-  printf("Items in the Queue:%d\n",len(root));
+  printf("Items in the Queue:%d\n",len(q));
   printQueue(q);
 
   printf("Insert Element 3 to the Queue\n");
   insert(q,3);
-  printf("Items in the Queue:%d\n",len(root));
+  printf("Items in the Queue:%d\n",len(q));
   printQueue(q);
   /* Removing items from the queue */  
 
